@@ -5,14 +5,13 @@ const opts = ['*', '/', '+', '-', '9', '8', '7', '6', '5', '4', '3', '2', '1', '
 // Special function keys
 const spec = ['*', '/', '+', '-'];
 
-function addOutput(e) {
-    console.log(e);
-}
-
 
 function init() {
     document.title = "JavaScript Calculator"
     console.log('ready');
+
+    let dec = false;
+    let eva = false;
 
     // Create a div element called container
     const container = document.createElement('div');
@@ -48,9 +47,35 @@ function init() {
     main.style.width = '100%';
     container.appendChild(main);
 
-    opts.forEach(function(val) {
+    opts.forEach(function (val) {
         btnMaker(val, addOutput)
     })
+
+    btnMaker('=', evalOutput);
+    btnMaker('C', clrOutput);
+
+    function cOutput(v) {
+        output.style.border = v + '1px solid';
+        output.style.color = v;
+    }
+
+    function evalOutput() {
+        cOutput('black');
+        if (output.value === "") {
+            cOutput('red');
+        } else if(eva) {
+            cOutput('red');
+        } else {
+            output.value = eval(output.value);
+        }
+        dec = output.value.includes('.');
+    }
+
+
+    function clrOutput() {
+        cOutput('black');
+        output.value = "";
+    }
 
     function btnMaker(txt, myFunction) {
         let btn = document.createElement('button');
@@ -63,6 +88,28 @@ function init() {
         btn.textContent = txt;
         btn.addEventListener('click', myFunction);
         main.appendChild(btn);
+    }
+
+    function addOutput(e) {
+        cOutput('black');
+        console.log(e.target);
+        let char = e.target.val;
+
+        if (char == '.') {
+            if (dec) {
+                char = '';
+                cOutput('red');
+            } else {
+                dec = true;
+            }
+        }
+
+        eva = spec.includes(char);
+
+        if(eva) {
+            dec = false;
+        }
+        output.value += char;
     }
 
 }
