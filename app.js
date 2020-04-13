@@ -1,116 +1,181 @@
-window.addEventListener('DOMContentLoaded', init);
+var display = document.getElementById('screen');
+var buttons = document.getElementsByClassName('button');
 
-// All calculator keys
-const opts = ['*', '/', '+', '-', '9', '8', '7', '6', '5', '4', '3', '2', '1', '0', '.'];
-// Special function keys
-const spec = ['*', '/', '+', '-'];
-
-
-function init() {
-    document.title = "JavaScript Calculator"
-    console.log('ready');
-
-    let dec = false;
-    let eva = false;
-
-    // Create a div element called container
-    const container = document.createElement('div');
-    // Add a class of container to the div
-    container.classList.add('container');
-    // Set the maximum width of the container div to 600px
-    container.style.maxWidth = '600px';
-    // Center the container
-    container.style.margin = 'auto';
-    // Add the container element to the main body
-    document.body.appendChild(container);
-
-    // Create an input element called output
-    const output = document.createElement('input');
-    // Set the input type to text
-    output.setAttribute('type', 'text');
-    // Add a class of 'output' to the input element
-    output.classList.add('output');
-    // Set the width to 100% (max-width previously defined)
-    output.style.width = '100%';
-    // Set the line height to 50px
-    output.style.lineHeight = '50px';
-    // Set the font size to 3em
-    output.style.fontSize = '3em';
-    // Align the text to the right
-    output.style.textAlign = 'right';
-    // Append the output element to container
-    container.appendChild(output);
-
-    // Create a div element to hold all calculator keys
-    const main = document.createElement('div');
-    main.classList.add('main');
-    main.style.width = '100%';
-    container.appendChild(main);
-
-    opts.forEach(function (val) {
-        btnMaker(val, addOutput)
-    })
-
-    btnMaker('=', evalOutput);
-    btnMaker('C', clrOutput);
-
-    function cOutput(v) {
-        output.style.border = v + '1px solid';
-        output.style.color = v;
-    }
-
-    function evalOutput() {
-        cOutput('black');
-        if (output.value === "") {
-            cOutput('red');
-        } else if(eva) {
-            cOutput('red');
-        } else {
-            output.value = eval(output.value);
+Array.prototype.forEach.call(buttons, function (button) {
+    button.addEventListener('click', function () {
+        if (button.textContent != '=' &&
+            button.textContent != 'C' &&
+            button.textContent != 'x' &&
+            button.textContent != '%' &&
+            button.textContent != '√' &&
+            button.textContent != 'x²' &&
+            button.textContent != '÷' &&
+            button.textContent != '<=' &&
+            button.textContent != '±' &&
+            button.textContent != 'sin' &&
+            button.textContent != 'cos' &&
+            button.textContent != 'tan' &&
+            button.textContent != 'log' &&
+            button.textContent != 'ln' &&
+            button.textContent != 'x^' &&
+            button.textContent != 'x!' &&
+            button.textContent != 'π' &&
+            button.textContent != 'e' &&
+            button.textContent != 'rad' &&
+            button.textContent != '∘') {
+            display.value += button.textContent;
+        } else if (button.textContent === '=') {
+            equals();
+        } else if (button.textContent === 'C') {
+            clear();
+        } else if (button.textContent === 'x') {
+            multiply();
+        } else if (button.textContent === '÷') {
+            divide();
+        } else if (button.textContent === '%') {
+            percent();
+        } else if (button.textContent === 'π') {
+            pi();
+        } else if (button.textContent === 'x²') {
+            square();
+        } else if (button.textContent === '√') {
+            squareRoot();
+        } else if (button.textContent === 'sin') {
+            sin();
+        } else if (button.textContent === 'cos') {
+            cos();
+        } else if (button.textContent === 'tan') {
+            tan();
+        } else if (button.textContent === 'log') {
+            log();
+        } else if (button.textContent === 'ln') {
+            ln();
+        } else if (button.textContent === "x^") {
+            exponent();
+        } else if (button.textContent === "x!") {
+            factorial();
+        } else if (button.textContent === "e") {
+            exp();
+        } else if (button.textContent === "rad") {
+            radians();
+        } else if (button.textContent === "∘") {
+            degrees();
         }
-        dec = output.value.includes('.');
+    });
+});
+
+
+function syntaxError() {
+    if (eval(display.value) == SyntaxError || eval(display.value) == ReferenceError || eval(display.value) == TypeError) {
+        display.value == 'Syntax Error';
     }
-
-
-    function clrOutput() {
-        cOutput('black');
-        output.value = "";
-    }
-
-    function btnMaker(txt, myFunction) {
-        let btn = document.createElement('button');
-        btn.setAttribute('type', 'button');
-        btn.style.width = '23%';
-        btn.style.lineHeight = '50px';
-        btn.style.margin = '1%';
-        btn.style.fontSize = '2em';
-        btn.val = txt;
-        btn.textContent = txt;
-        btn.addEventListener('click', myFunction);
-        main.appendChild(btn);
-    }
-
-    function addOutput(e) {
-        cOutput('black');
-        console.log(e.target);
-        let char = e.target.val;
-
-        if (char == '.') {
-            if (dec) {
-                char = '';
-                cOutput('red');
-            } else {
-                dec = true;
-            }
-        }
-
-        eva = spec.includes(char);
-
-        if(eva) {
-            dec = false;
-        }
-        output.value += char;
-    }
-
 }
 
+
+function equals() {
+    if ((display.value).indexOf('^') > -1) {
+        var base = (display.value).slice(0, (display.value).indexOf('^'));
+        var exponent = (display.value).slice((display.value).indexOf('^') + 1);
+        display.value = eval('Math.pow(' + base + ',' + exponent + ')');
+    } else {
+        display.value = eval(display.value)
+        checkLength()
+        syntaxError();
+    }
+}
+
+
+function clear() {
+    display.value = '';
+}
+
+
+function backspace() {
+    display.value = display.value.substring(0, display.value.length - 1);
+}
+
+
+function multiply() {
+    display.value += '*';
+}
+
+
+function divide() {
+    display.value += '/'
+}
+
+
+function plusMinus() {
+    if (display.value.charAt(0) === '-') {
+        display.value = display.value.slice(1);
+    } else {
+        display.value = '-' + display.value;
+    }
+}
+
+function factorial() {
+    var number = 1;
+    if (display.value === 0) {
+        display.value = '1';
+    } else if (display.value < 0) {
+        display.value = 'undefined';
+    } else {
+        var number = 1;
+        for (var i = display.value; i > 0; i--) {
+            number *= i;
+        }
+        display.value = number;
+    }
+}
+
+function pi() {
+    display.value = (display.value * Math.PI);
+}
+
+function square() {
+    display.value = eval(display.value * display.value);
+}
+
+function squareRoot() {
+    display.value = Math.sqrt(display.value);
+}
+
+function percent() {
+    display.value = display.value / 100;
+}
+
+function sin() {
+    display.value = Math.sin(display.value);
+}
+
+function cos() {
+    display.value = Math.cos(display.value);
+}
+
+function tan() {
+    display.value = Math.tan(display.value);
+}
+
+function log() {
+    display.value = Math.log10(display.value);
+}
+
+function ln() {
+    display.value = Math.log(display.value);
+}
+
+function exponenet() {
+    display.value += '^';
+}
+
+function exp() {
+    display.value = Math.exp(display.value);
+}
+
+function radians() {
+    display.value = display.value * (Math.PI / 180);
+}
+
+function degrees() {
+    display.value = display.value * (180 / Math.PI);
+}

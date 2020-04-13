@@ -8,4 +8,6 @@ Features include -
 * Display an error message if division by zero is attempted
 * Backspace button to clear singular digits
 * Keyboard support
+* Doesn't allow letters to be typed in
+* On/Off button?
 

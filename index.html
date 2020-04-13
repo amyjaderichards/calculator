@@ -4,11 +4,67 @@
 <head>
     <meta charset="UTF-8" />
     <title></title>
+    <link rel="stylesheet" href="main.css">
 </head>
 
 <body>
-    <script src="app.js">
-    </script>
+    <div class="container">
+        <div class="flex-center flex-column">
+            <div class="calculator">
+                <input type="text" id="screen" maxlength="30">
+
+                <!--BUTTONS-->
+                <div class="calc-buttons">
+
+                    <!--BASIC FUNCTIONS-->
+                    <div class="basic-functions">
+                        <button class="button trigger">C</button>
+                        <button class="button basic">(</button>
+                        <button class="button basic">)</button>
+                        <button class="button number">7</button>
+                        <button class="button number">8</button>
+                        <button class="button number">9</button>
+                        <button class="button number">4</button>
+                        <button class="button number">5</button>
+                        <button class="button number">6</button>
+                        <button class="button number">1</button>
+                        <button class="button number">2</button>
+                        <button class="button number">3</button>
+                        <button class="button basic">±</button>
+                        <button class="button number">0</button>
+                        <button class="button basic">.</button>
+                    </div>
+
+                    <!--SCIENTIFIC FUNCTIONS-->
+                    <div class="scientific-functions">
+                        <button class="button trigger">&#60;=</button>
+                        <button class="button complex">%</button>
+                        <button class="button complex">x!</button>
+                        <button class="button complex">x^</button>
+                        <button class="button basic">*</button>
+                        <button class="button basic">/</button>
+                        <button class="button complex">ln</button>
+                        <button class="button complex">e</button>
+                        <button class="button basic">+</button>
+                        <button class="button complex">x²</button>
+                        <button class="button complex">log</button>
+                        <button class="button complex">cos</button>
+                        <button class="button basic">-</button>
+                        <button class="button complex">√</button>
+                        <button class="button complex">sin</button>
+                        <button class="button complex">tan</button>
+                        <button class="button trigger">=</button>
+                        <button class="button complex">&#x003c0;</button>
+                        <button class="button complex">∘</button>
+                        <button class="button complex">rad</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
 
 </body>
 
