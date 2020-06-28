@@ -1,5 +1,5 @@
-# calculator
-A pure JavaScript calculator written using [this](https://www.udemy.com/course/javascript-code-exercise/learn/lecture/16973348#overview) tutorial and then extended while working through [TOP](https://www.theodinproject.com) curriculum. 
+# Summary
+A pure JavaScript calculator written using the Udamy tutorial  [Pure JavaScript Calculator - JavaScript ES6 Learn JavaScript](https://www.udemy.com/course/javascript-code-exercise/). The code was then improved as part of the fifth project for [The Odin Project](https://www.theodinproject.com). 
 
 Features include -
 * Basic functions (+, -, /, *)
@@ -9,5 +9,11 @@ Features include -
 * Backspace button to clear singular digits
 * Keyboard support
 * Doesn't allow letters to be typed in
-* On/Off button?
 
+# Languages Used
+- HTML
+- CSS
+- JavaScript
+
+# ToDo
+- Add an On/Off button
