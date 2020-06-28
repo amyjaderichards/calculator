@@ -1,5 +1,5 @@
 # Summary
-A pure JavaScript calculator written using the Udamy tutorial  [Pure JavaScript Calculator - JavaScript ES6 Learn JavaScript](https://www.udemy.com/course/javascript-code-exercise/). The code was then improved as part of the fifth project for [The Odin Project](https://www.theodinproject.com). 
+A pure JavaScript scientific calculator written using the Udemy tutorial  [Pure JavaScript Calculator - JavaScript ES6 Learn JavaScript](https://www.udemy.com/course/javascript-code-exercise/). The code was then improved as part of the fifth project for [The Odin Project](https://www.theodinproject.com). 
 
 Features include -
 * Basic functions (+, -, /, *)
